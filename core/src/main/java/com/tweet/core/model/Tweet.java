@@ -1,11 +1,18 @@
 package com.tweet.core.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Tweet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long tweetId;
     private String username;
     private String content;
-    private Long date;
+    private LocalDate createdDate;
 }
