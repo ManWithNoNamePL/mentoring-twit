@@ -15,4 +15,36 @@ public class Tweet {
     private String username;
     private String content;
     private LocalDate createdDate;
+
+    public long getTweetId() {
+        return tweetId;
+    }
+
+    public void setTweetId(long tweetId) {
+        this.tweetId = tweetId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
 }
