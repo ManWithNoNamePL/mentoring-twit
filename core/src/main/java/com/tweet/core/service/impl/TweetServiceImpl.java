@@ -5,9 +5,11 @@ import com.tweet.core.model.User;
 import com.tweet.core.repository.TweetRepository;
 import com.tweet.core.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TweetServiceImpl implements TweetService {
 
     @Autowired
@@ -16,7 +18,7 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public void create(Tweet tweet) {
-        
+
     }
 
     @Override
