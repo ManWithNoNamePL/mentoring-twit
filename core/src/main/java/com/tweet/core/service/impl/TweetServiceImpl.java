@@ -32,27 +32,17 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public void update(Tweet update) {
+    public void delete(Long tweetId) {
 
     }
 
     @Override
-    public void delete(String tweetId) {
-
+    public User getUserByTweet(Long tweetId) {
+        return null;
     }
 
     @Override
-    public void getUserByTweet(String tweetId) {
-
-    }
-
-    @Override
-    public void getTweetByUser(String username) {
-
-    }
-
-    @Override
-    public void getAllUserTweets(String username) {
-
+    public List<Tweet> getAllUserTweets(String username) {
+        return null;
     }
 }

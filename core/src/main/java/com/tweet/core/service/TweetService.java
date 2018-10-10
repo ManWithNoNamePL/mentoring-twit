@@ -13,14 +13,10 @@ public interface TweetService {
 
     List<Tweet> getAll();
 
-    void update(Tweet update);
+    void delete(Long tweetId);
 
-    void delete(String tweetId);
+    User getUserByTweet(Long tweetId);
 
-    void getUserByTweet(String tweetId);
-
-    void getTweetByUser(String username);
-
-    void getAllUserTweets(String username);
+    List<Tweet> getAllUserTweets(String username);
 
 }
