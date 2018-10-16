@@ -9,6 +9,8 @@ public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long tweetId;
+
+    @JoinColumn(name = "user", referencedColumnName = "username", nullable = false)
     private String user;
     private String content;
     private LocalDate createdDate;
