@@ -2,6 +2,8 @@ package com.tweet.core.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -10,6 +12,9 @@ public class User {
     private String email;
     private String firstName;
     private String surname;
+
+    @OneToMany(mappedBy = "username")
+    private Set<Tweet> tweets;
 
     public String getUsername() {
         return username;
@@ -41,5 +46,13 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Set<Tweet> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(Set<Tweet> tweets) {
+        this.tweets = tweets;
     }
 }
