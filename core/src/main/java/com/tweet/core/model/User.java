@@ -1,8 +1,7 @@
 package com.tweet.core.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,6 +11,10 @@ public class User {
     private String email;
     private String firstName;
     private String surname;
+
+    @Enumerated(EnumType.STRING)
+    @ManyToMany
+    private List<UserRole> userRoles;
 
     @OneToMany(mappedBy = "user", targetEntity = Tweet.class)
     private Set<Tweet> tweets;
@@ -54,5 +57,13 @@ public class User {
 
     public void setTweets(Set<Tweet> tweets) {
         this.tweets = tweets;
+    }
+
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }
