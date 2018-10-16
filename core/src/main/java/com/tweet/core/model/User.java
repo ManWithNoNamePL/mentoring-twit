@@ -13,7 +13,7 @@ public class User {
     private String firstName;
     private String surname;
 
-    @OneToMany(mappedBy = "username")
+    @OneToMany(mappedBy = "user", targetEntity = Tweet.class)
     private Set<Tweet> tweets;
 
     public String getUsername() {

@@ -10,9 +10,8 @@ public class Tweet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long tweetId;
 
-    @ManyToOne
-    @JoinColumn(name = "username")
-    private User username;
+    @JoinColumn(name = "user", referencedColumnName = "username", nullable = false)
+    private String user;
     private String content;
     private LocalDate createdDate;
 
@@ -24,12 +23,12 @@ public class Tweet {
         this.tweetId = tweetId;
     }
 
-    public User getUsername() {
-        return username;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsername(User username) {
-        this.username = username;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getContent() {
