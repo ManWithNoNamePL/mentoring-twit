@@ -1,23 +1,35 @@
 package com.tweet.core.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 public class User {
 
-    private @Id String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String username;
     private String email;
     private String firstName;
     private String surname;
 
-    @Enumerated(EnumType.STRING)
-    @ManyToMany
-    private List<UserRole> userRoles;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "role_mapping",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<UserRole> userRoles;
 
     @OneToMany(mappedBy = "user", targetEntity = Tweet.class)
     private Set<Tweet> tweets;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -59,11 +71,11 @@ public class User {
         this.tweets = tweets;
     }
 
-    public List<UserRole> getUserRoles() {
+    public Set<UserRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(List<UserRole> userRoles) {
+    public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
 }
