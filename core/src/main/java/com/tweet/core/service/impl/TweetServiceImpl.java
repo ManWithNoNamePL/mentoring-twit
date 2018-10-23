@@ -42,7 +42,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public List<Tweet> getAllUserTweets(String username) {
+    public List<Tweet> getAllUserTweets(Long username) {
         return null;
     }
 }
