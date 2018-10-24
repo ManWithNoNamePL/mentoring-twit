@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getById(Long id) {
+        return null;
+    }
+
+    @Override
     public void update(User update) {
         // validate user
         // update user in db
