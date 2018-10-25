@@ -22,9 +22,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/{username}")
-    public ResponseEntity getUserByName(@PathVariable String username) {
-        return ResponseEntity.ok(userService.getByName(username));
+    @GetMapping(value = "/{id}")
+    public ResponseEntity getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getById(id));
     }
 
     @GetMapping
