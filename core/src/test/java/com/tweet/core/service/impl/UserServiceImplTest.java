@@ -21,7 +21,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    public void getByName_existingUser_returnUser() {
+    public void getById_existingUser_returnUser() {
         User user = new User();
         user.setId(1L);
         user.setFirstName("Test F");
@@ -33,10 +33,38 @@ class UserServiceImplTest {
         role.setName(UserRole.Name.USER);
         user.setUserRoles(Collections.singleton(role));
 
-        assertThat(userService.getByName("test"))
+        assertThat(userService.getById(1L))
                 .isEqualToComparingFieldByField(user);
     }
 
+    @Test
+    public void getAll_returnAllUsers() {
+        User user = new User();
+        user.setId(1L);
+        user.setFirstName("Test F");
+        user.setSurname("Test S");
+        user.setUsername("test");
+        user.setEmail("test@te.co");
+
+        User user2 = new User();
+        user2.setId(2L);
+        user2.setFirstName("Test F");
+        user2.setSurname("Test S");
+        user2.setUsername("test");
+        user2.setEmail("test@te.co");
+
+        UserRole role = new UserRole();
+        role.setName(UserRole.Name.USER);
+        user.setUserRoles(Collections.singleton(role));
+
+        assertThat(userService.getAll())
+                .containsExactly(user, user2);
+    }
+
+    public void getUserById_notExisting_returnNull() {
+        assertThat(userService.getById(-1L))
+                .isNull();
+    }
 
     private static void createCorrectUser(Long id, String firstName, String surname, String username, String email, Set<UserRole> roles) {
         User user = new User();
