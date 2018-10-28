@@ -1,8 +1,11 @@
 package com.tweet.core.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Data
 @Entity
 public class Tweet {
 
@@ -14,36 +17,4 @@ public class Tweet {
     private Long userId;
     private String content;
     private LocalDate createdDate;
-
-    public Long getTweetId() {
-        return tweetId;
-    }
-
-    public void setTweetId(Long tweetId) {
-        this.tweetId = tweetId;
-    }
-
-    public Long getUser() {
-        return userId;
-    }
-
-    public void setUser(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
 }
