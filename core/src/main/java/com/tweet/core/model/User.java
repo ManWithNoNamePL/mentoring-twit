@@ -1,10 +1,12 @@
 package com.tweet.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -49,10 +51,40 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "followers_mapping",
-            joinColumns = {@JoinColumn(name = "follower_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "followed_id", referencedColumnName = "user_id")})
+            joinColumns = {@JoinColumn(name = "follower_id")},
+            inverseJoinColumns = {@JoinColumn(name = "followed_id")})
     private Set<User> following;
 
-    @ManyToMany(mappedBy = "following") // TODO Infinite recursion (StackOverflowError) (through reference chain: com.tweet.core.model.User[\"following\"])
+    @JsonIgnore
+    @ManyToMany(mappedBy = "following")
     private Set<User> followers;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + getId() +
+                ", username='" + getUsername() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", firstName='" + getFirstName() + '\'' +
+                ", surname='" + getSurname() + '\'' +
+                ", active=" + getActive() +
+                ", userRoles=" + getUserRoles() +
+                ", tweets=" + getTweets() +
+                ", settings=" + getSettings() +
+                '}';
+    }
 }
