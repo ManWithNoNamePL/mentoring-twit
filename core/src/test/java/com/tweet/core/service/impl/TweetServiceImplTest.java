@@ -4,15 +4,23 @@ import com.tweet.core.model.Tweet;
 import com.tweet.core.service.TweetService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TweetServiceImplTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class TweetServiceImplTest {
 
     private static final LocalDate NOW = LocalDate.now();
-    private static TweetService tweetService = new TweetServiceImpl();
+
+    @Autowired
+    private static TweetService tweetService;
 
     @BeforeAll
     private static void setUp() {
