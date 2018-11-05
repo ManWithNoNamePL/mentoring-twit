@@ -17,6 +17,6 @@ public interface TweetService {
 
     User getUserByTweet(Long tweetId);
 
-    List<Tweet> getAllUserTweets(String username);
+    List<Tweet> getAllUserTweets(Long userId);
 
 }

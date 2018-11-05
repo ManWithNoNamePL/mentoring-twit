@@ -8,27 +8,27 @@ public class Tweet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long tweetId;
+    private Long tweetId;
 
     @JoinColumn(name = "user", referencedColumnName = "username", nullable = false)
-    private String user;
+    private Long userId;
     private String content;
     private LocalDate createdDate;
 
-    public long getTweetId() {
+    public Long getTweetId() {
         return tweetId;
     }
 
-    public void setTweetId(long tweetId) {
+    public void setTweetId(Long tweetId) {
         this.tweetId = tweetId;
     }
 
-    public String getUser() {
-        return user;
+    public Long getUser() {
+        return userId;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUser(Long userId) {
+        this.userId = userId;
     }
 
     public String getContent() {
