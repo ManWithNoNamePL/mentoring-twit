@@ -2,6 +2,7 @@ package com.tweet.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -18,6 +19,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id", nullable = false)
     private Long id;
+
+    @NaturalId
+    private String isbn;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -64,14 +68,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(getId(), user.getId())
-                && Objects.equals(getFirstName(), user.getFirstName())
-                && Objects.equals(getSurname(), user.getSurname());
+        return Objects.equals(getIsbn(), user.getIsbn());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getSurname());
+        return Objects.hash(getIsbn());
     }
 
     @Override
