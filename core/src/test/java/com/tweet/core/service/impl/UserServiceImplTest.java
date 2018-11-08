@@ -4,15 +4,22 @@ import com.tweet.core.model.User;
 import com.tweet.core.model.UserRole;
 import com.tweet.core.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class UserServiceImplTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserServiceImplTest {
 
-    private static final UserService userService = new UserServiceImpl();
+    @Autowired
+    private static UserService userService;
 
     public void setUp() {
         UserRole role = new UserRole();
