@@ -1,81 +1,94 @@
 package com.tweet.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.Objects;
 import java.util.Set;
 
+@Data
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id", nullable = false)
     private Long id;
+
+    @NaturalId
+    private String isbn;
+
+    @Column(name = "username", nullable = false)
     private String username;
+
+    @Length(min = 8)
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Email
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "surname")
     private String surname;
 
+    @Column(name = "active")
+    private Integer active;
+
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "role_mapping",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "role_mapping", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRole> userRoles;
 
-    @OneToMany(mappedBy = "user", targetEntity = Tweet.class)
+    @OneToMany(mappedBy = "userId")
     private Set<Tweet> tweets;
 
-    public Long getId() {
-        return id;
+    @OneToOne(mappedBy = "userId")
+    private UserSettings userSettings;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "followers_mapping",
+            joinColumns = {@JoinColumn(name = "follower_id")},
+            inverseJoinColumns = {@JoinColumn(name = "followed_id")})
+    private Set<User> following;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "following")
+    private Set<User> followers;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getIsbn(), user.getIsbn());
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIsbn());
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Set<Tweet> getTweets() {
-        return tweets;
-    }
-
-    public void setTweets(Set<Tweet> tweets) {
-        this.tweets = tweets;
-    }
-
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + getId() +
+                ", username='" + getUsername() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", firstName='" + getFirstName() + '\'' +
+                ", surname='" + getSurname() + '\'' +
+                ", active=" + getActive() +
+                ", userRoles=" + getUserRoles() +
+                ", tweets=" + getTweets() +
+                ", userSettings=" + this.getUserSettings() +
+                '}';
     }
 }

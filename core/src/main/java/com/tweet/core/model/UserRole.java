@@ -1,34 +1,24 @@
 package com.tweet.core.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
+@Table(name = "user_role")
 public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "role_id")
     private long roleId;
 
-    public long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
-    }
-
     @Enumerated(EnumType.STRING)
+    @Column(name = "name", nullable = false)
     private Name name;
 
-    public Name getName() {
-        return name;
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
     public enum Name {
-        USER, ADMINISTRATOR;
+        USER, ADMINISTRATOR
     }
 }

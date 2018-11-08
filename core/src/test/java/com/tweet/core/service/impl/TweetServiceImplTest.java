@@ -34,7 +34,7 @@ public class TweetServiceImplTest {
         tweet.setContent("Hello, World! 1");
         tweet.setCreatedDate(NOW);
         tweet.setTweetId(1L);
-        tweet.setUser(1L);
+        tweet.setUserId(1L);
 
         assertThat(tweetService.getById(1L))
                 .isEqualToComparingFieldByField(tweet);
@@ -46,13 +46,13 @@ public class TweetServiceImplTest {
         tweet1.setContent("Hello, World! 1");
         tweet1.setCreatedDate(NOW);
         tweet1.setTweetId(1L);
-        tweet1.setUser(1L);
+        tweet1.setUserId(1L);
 
         Tweet tweet2 = new Tweet();
         tweet2.setContent("Hello, World! 2");
         tweet2.setCreatedDate(NOW);
         tweet2.setTweetId(2L);
-        tweet2.setUser(1L);
+        tweet2.setUserId(1L);
 
         assertThat(tweetService.getAll())
                 .containsExactly(tweet1, tweet2);
@@ -77,7 +77,7 @@ public class TweetServiceImplTest {
         tweet.setContent(content);
         tweet.setCreatedDate(date);
         tweet.setTweetId(id);
-        tweet.setUser(userId);
+        tweet.setUserId(userId);
 
         tweetService.create(tweet);
     }
