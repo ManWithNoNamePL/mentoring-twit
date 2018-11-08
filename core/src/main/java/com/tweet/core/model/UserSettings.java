@@ -7,8 +7,8 @@ import java.util.TimeZone;
 
 @Data
 @Entity
-@Table(name = "settings")
-public class Settings {
+@Table(name = "user_settings")
+public class UserSettings {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

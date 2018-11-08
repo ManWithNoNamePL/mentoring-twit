@@ -36,7 +36,7 @@ INSERT INTO tweet (tweet_id, user_id, content, created_date) VALUES (5, 5, 'Hell
 -- end
 
 -- start
-INSERT INTO settings (setting_id, user_id, country, language) VALUES (1, 1, 'Poland', 'PL');
+INSERT INTO user_settings (setting_id, user_id, country, language) VALUES (1, 1, 'Poland', 'PL');
 -- end
 
 

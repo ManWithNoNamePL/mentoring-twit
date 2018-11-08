@@ -47,7 +47,7 @@ public class User {
     private Set<Tweet> tweets;
 
     @OneToOne(mappedBy = "userId")
-    private Settings settings;
+    private UserSettings userSettings;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "followers_mapping",
@@ -86,7 +86,7 @@ public class User {
                 ", active=" + getActive() +
                 ", userRoles=" + getUserRoles() +
                 ", tweets=" + getTweets() +
-                ", settings=" + getSettings() +
+                ", userSettings=" + this.getUserSettings() +
                 '}';
     }
 }
