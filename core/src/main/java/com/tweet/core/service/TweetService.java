@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface TweetService {
 
-    void create(Tweet tweet);
+    Tweet create(Tweet tweet);
 
-    User getById(Long tweetId);
+    Tweet getById(Long tweetId);
 
     List<Tweet> getAll();
 
     void delete(Long tweetId);
 
-    User getUserByTweet(Long tweetId);
+    Long getUserIdByTweet(Long tweetId);
 
     List<Tweet> getAllUserTweets(Long userId);
 

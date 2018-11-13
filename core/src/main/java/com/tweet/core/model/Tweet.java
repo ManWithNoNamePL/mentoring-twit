@@ -16,7 +16,7 @@ public class Tweet {
     @Column(name = "tweet_id")
     private Long tweetId;
 
-    @JoinColumn(name = "user_id", referencedColumnName = "username", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     private Long userId;
 
     @Column(name = "content", length = 140)
@@ -36,7 +36,7 @@ public class Tweet {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTweetId(), getUserId());
+        return Objects.hash(createdDate);
     }
 
     @Override

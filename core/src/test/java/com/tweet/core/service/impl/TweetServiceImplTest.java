@@ -1,85 +1,100 @@
 package com.tweet.core.service.impl;
 
 import com.tweet.core.model.Tweet;
+import com.tweet.core.model.User;
 import com.tweet.core.service.TweetService;
-import org.junit.jupiter.api.BeforeAll;
+import com.tweet.core.service.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
+@Transactional
 public class TweetServiceImplTest {
 
     private static final LocalDate NOW = LocalDate.now();
 
     @Autowired
-    private static TweetService tweetService;
+    private TweetService tweetService;
+    @Autowired
+    private UserService userService;
 
-    @BeforeAll
-    private static void setUp() {
-        createCorrectTweet("Hello, World! 1", NOW, 1L, 1L);
-        createCorrectTweet("Hello, World! 2", NOW, 2L, 1L);
+    private User tweetOwner;
+
+    @BeforeEach
+    void setUpTweetOwnerUser() {
+        User user = new User();
+        user.setFirstName("Test F");
+        user.setSurname("Test S");
+        user.setUsername("test");
+        user.setEmail("test@te.co");
+        user.setPassword("pass12345");
+        tweetOwner = userService.create(user);
     }
 
     @Test
     void getOne_existingTweet_returnTweet() {
+        Long tweetId = createCorrectTweet("Hello, World! 1", NOW, tweetOwner.getId());
+
         Tweet tweet = new Tweet();
         tweet.setContent("Hello, World! 1");
         tweet.setCreatedDate(NOW);
-        tweet.setTweetId(1L);
-        tweet.setUserId(1L);
 
-        assertThat(tweetService.getById(1L))
-                .isEqualToComparingFieldByField(tweet);
+        assertThat(tweetService.getById(tweetId))
+                .isEqualToIgnoringGivenFields(tweet, "tweetId", "userId");
     }
 
     @Test
     void getAll_returnExistingTweets() {
+        createCorrectTweet("Hello, World! 1", NOW, tweetOwner.getId());
+        createCorrectTweet("Hello, World! 2", NOW, tweetOwner.getId());
+
         Tweet tweet1 = new Tweet();
         tweet1.setContent("Hello, World! 1");
         tweet1.setCreatedDate(NOW);
-        tweet1.setTweetId(1L);
-        tweet1.setUserId(1L);
 
         Tweet tweet2 = new Tweet();
         tweet2.setContent("Hello, World! 2");
         tweet2.setCreatedDate(NOW);
-        tweet2.setTweetId(2L);
-        tweet2.setUserId(1L);
 
         assertThat(tweetService.getAll())
+                .usingElementComparatorIgnoringFields("tweetId", "userId")
                 .containsExactly(tweet1, tweet2);
     }
 
     @Test
     void getUserByTweet_correctTweetId_returnUser() {
-        assertThat(tweetService.getUserByTweet(1L).getId())
-                .isEqualTo(1L);
+        Long tweetId = createCorrectTweet("Hello, World! 1", NOW, tweetOwner.getId());
+
+        assertThat(tweetService.getUserIdByTweet(tweetId))
+                .isEqualTo(tweetOwner.getId());
     }
 
 
     @Test
     void getAllUserTweets_correctUserId_returnAllTweets() {
-        assertThat(tweetService.getAllUserTweets(1L))
-                .hasSize(2)
-                .isEqualTo(1L);
+        createCorrectTweet("Hello, World! 1", NOW, tweetOwner.getId());
+        createCorrectTweet("Hello, World! 2", NOW, tweetOwner.getId());
+        assertThat(tweetService.getAllUserTweets(tweetOwner.getId()))
+                .hasSize(2);
     }
 
-    private static void createCorrectTweet(String content, LocalDate date, Long id, Long userId) {
+    private Long createCorrectTweet(String content, LocalDate date, Long userId) {
         Tweet tweet = new Tweet();
         tweet.setContent(content);
         tweet.setCreatedDate(date);
-        tweet.setTweetId(id);
         tweet.setUserId(userId);
 
-        tweetService.create(tweet);
+        return tweetService.create(tweet).getTweetId();
     }
 
 }

@@ -12,7 +12,7 @@ public class UserSettings {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "setting_id", nullable = false)
+    @Column(name = "settings_id", nullable = false)
     private Long id;
 
     @OneToOne(targetEntity = User.class)
