@@ -15,14 +15,18 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public void create(User user) {
+    public User create(User user) {
         // to do some validation
         // create user in DB
+        // TODO mpoborowski: for now simple insert to keep tests happy :)
+        return userRepository.save(user);
     }
 
     @Override
     public User getById(Long id) {
-        return null;
+        return userRepository.findById(id).orElseThrow(
+                // FIXME mpoborowski: this is not a best exception here, we should be using own here.
+                () -> new IllegalStateException(String.format("User with id [%d] not found.", id)));
     }
 
     @Override

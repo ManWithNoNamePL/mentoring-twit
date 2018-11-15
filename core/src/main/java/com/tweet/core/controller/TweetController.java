@@ -26,8 +26,8 @@ public class TweetController {
     }
 
     @GetMapping(value = "/{tweetId}/user")
-    public ResponseEntity getUserByTweet(@PathVariable Long tweetId) {
-        return ResponseEntity.ok(tweetService.getUserByTweet(tweetId));
+    public ResponseEntity getUserIdByTweet(@PathVariable Long tweetId) {
+        return ResponseEntity.ok(tweetService.getUserIdByTweet(tweetId));
     }
 
     @GetMapping(value = "/{username}/all")

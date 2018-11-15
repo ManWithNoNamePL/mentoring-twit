@@ -17,18 +17,20 @@ public class TweetServiceImpl implements TweetService {
 
 
     @Override
-    public void create(Tweet tweet) {
-
+    public Tweet create(Tweet tweet) {
+        return tweetRepository.save(tweet);
     }
 
     @Override
-    public User getById(Long tweetId) {
-        return null;
+    public Tweet getById(Long tweetId) {
+        return tweetRepository.findById(tweetId).orElseThrow(
+                // FIXME mpoborowski: this is not a best exception here, we should be using own here.
+                () -> new IllegalStateException(String.format("Tweet with id [%d] not found", tweetId)));
     }
 
     @Override
     public List<Tweet> getAll() {
-        return null;
+        return tweetRepository.findAll();
     }
 
     @Override
@@ -37,12 +39,15 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public User getUserByTweet(Long tweetId) {
-        return null;
+    public Long getUserIdByTweet(Long tweetId) {
+        return tweetRepository.findById(tweetId).orElseThrow(
+                // FIXME mpoborowski: this is not a best exception here, we should be using own here.
+                () -> new IllegalStateException(String.format("Tweet with id [%d] not found", tweetId)))
+                .getUserId();
     }
 
     @Override
-    public List<Tweet> getAllUserTweets(Long username) {
-        return null;
+    public List<Tweet> getAllUserTweets(Long userId) {
+        return tweetRepository.findAllByUserId(userId);
     }
 }
