@@ -16,7 +16,8 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    // TODO mpoborowski: apparently there is bug in new hibernate that wont allow for data.sql and AUTO generation :/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Long id;
 
