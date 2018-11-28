@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <title>Register</title>
 </head>
 <body>
@@ -14,12 +15,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form_name">First Name *</label>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
                         <input id="form_name" class="form-control" type="text" th:field="${user.firstName}" placeholder="Please enter your fist name"/>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form_surname">Surname *</label>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"/>
                         <input id="form_surname" class="form-control" type="text" th:field="${user.surname}" placeholder="Please enter your Surname"/>
                     </div>
                 </div>
@@ -28,6 +31,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form_email">Email *</label>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
                         <input id="form_email" class="form-control" type="email" th:field="${user.email}" placeholder="Please enter your Email"/>
                     </div>
                 </div>
@@ -36,12 +40,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form_user_name">User Name *</label>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
                         <input id="form_user_name" class="form-control" type="text" th:field="${user.username}" placeholder="Please enter your User Name"/>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form_password">Password *</label>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
                         <input id="form_password" class="form-control" type="password" th:field="${user.password}" placeholder="Please enter your Password"/>
                     </div>
                 </div>
@@ -55,6 +61,6 @@
     </form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

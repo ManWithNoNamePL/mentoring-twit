@@ -7,6 +7,7 @@ import com.tweet.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
@@ -36,9 +37,15 @@ public class LogonController {
         return "registerUser";
     }
 
+    /* BindingResult need to be directly after bean, if its not exception will be thrown after not successful form
+     * validation! */
     @PostMapping("/register")
-    public String submitRegistrationForm(@Valid @ModelAttribute("user") User user, HttpServletRequest request)
+    public String submitRegistrationForm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpServletRequest request)
             throws ServletException {
+
+        if (bindingResult.hasErrors()) {
+            return "registerUser";
+        }
         // TODO: mpoborowski: temporary - this logic need to go to userService.create method
         user.setUserRoles(Set.of(userRoleRepository.findByName(UserRole.Name.USER)
                 .orElseThrow(() -> new IllegalStateException("No user role defined for role USER."))));
