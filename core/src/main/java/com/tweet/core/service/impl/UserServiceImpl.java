@@ -1,5 +1,6 @@
 package com.tweet.core.service.impl;
 
+import com.tweet.core.error.UserNotFoundException;
 import com.tweet.core.model.User;
 import com.tweet.core.repository.UserRepository;
 import com.tweet.core.service.UserService;
@@ -25,8 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(
-                // FIXME mpoborowski: this is not a best exception here, we should be using own here.
-                () -> new IllegalStateException(String.format("User with id [%d] not found.", id)));
+                () -> new UserNotFoundException(id));
     }
 
     @Override

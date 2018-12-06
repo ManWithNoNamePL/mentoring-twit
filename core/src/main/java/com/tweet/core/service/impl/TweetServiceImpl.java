@@ -1,7 +1,7 @@
 package com.tweet.core.service.impl;
 
+import com.tweet.core.error.TweetNotFoundException;
 import com.tweet.core.model.Tweet;
-import com.tweet.core.model.User;
 import com.tweet.core.repository.TweetRepository;
 import com.tweet.core.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,7 @@ public class TweetServiceImpl implements TweetService {
     @Override
     public Tweet getById(Long tweetId) {
         return tweetRepository.findById(tweetId).orElseThrow(
-                // FIXME mpoborowski: this is not a best exception here, we should be using own here.
-                () -> new IllegalStateException(String.format("Tweet with id [%d] not found", tweetId)));
+                () -> new TweetNotFoundException(tweetId));
     }
 
     @Override
@@ -41,8 +40,7 @@ public class TweetServiceImpl implements TweetService {
     @Override
     public Long getUserIdByTweet(Long tweetId) {
         return tweetRepository.findById(tweetId).orElseThrow(
-                // FIXME mpoborowski: this is not a best exception here, we should be using own here.
-                () -> new IllegalStateException(String.format("Tweet with id [%d] not found", tweetId)))
+                () -> new TweetNotFoundException(tweetId))
                 .getUserId();
     }
 
