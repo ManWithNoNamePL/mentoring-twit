@@ -1,9 +1,9 @@
 -- start
-INSERT INTO user (user_id, username, password, email, first_name, surname) VALUES (1, 'user_1', '1', 'test_1@t.com', 'Test', 'Test');
-INSERT INTO user (user_id, username, password, email, first_name, surname) VALUES (2, 'user_2', '1', 'test_2@t.com', 'Test', 'Test');
-INSERT INTO user (user_id, username, password, email, first_name, surname) VALUES (3, 'user_3', '1', 'test_3@t.com', 'Test', 'Test');
-INSERT INTO user (user_id, username, password, email, first_name, surname) VALUES (4, 'user_4', '1', 'test_4@t.com', 'Test', 'Test');
-INSERT INTO user (user_id, username, password, email, first_name, surname) VALUES (5, 'user_5', '1', 'test_5@t.com', 'Test', 'Test');
+INSERT INTO user (user_id, isbn, username, password, email, first_name, surname, active) VALUES (1, '123as', 'user_1', '1', 'test_1@t.com', 'Test', 'Test', 1);
+INSERT INTO user (user_id, isbn, username, password, email, first_name, surname, active) VALUES (2, '123ac', 'user_2', '1', 'test_2@t.com', 'Test', 'Test', 1);
+INSERT INTO user (user_id, isbn, username, password, email, first_name, surname, active) VALUES (3, '123ad', 'user_3', '1', 'test_3@t.com', 'Test', 'Test', 1);
+INSERT INTO user (user_id, isbn, username, password, email, first_name, surname, active) VALUES (4, '123af', 'user_4', '1', 'test_4@t.com', 'Test', 'Test', 1);
+INSERT INTO user (user_id, isbn, username, password, email, first_name, surname, active) VALUES (5, '123ag', 'user_5', '1', 'test_5@t.com', 'Test', 'Test', 1);
 -- end
 
 -- start
@@ -38,5 +38,3 @@ INSERT INTO tweet (tweet_id, user_id, content, created_date) VALUES (5, 5, 'Hell
 -- start
 INSERT INTO user_settings (settings_id, user_id, country, language) VALUES (1, 1, 'Poland', 'PL');
 -- end
-
-
