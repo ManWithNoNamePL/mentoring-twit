@@ -14,22 +14,6 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="form_name">First Name *</label>
-                        <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
-                        <input id="form_name" class="form-control" type="text" th:field="${user.firstName}" placeholder="Please enter your fist name"/>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="form_surname">Surname *</label>
-                        <div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"/>
-                        <input id="form_surname" class="form-control" type="text" th:field="${user.surname}" placeholder="Please enter your Surname"/>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
                         <label for="form_email">Email *</label>
                         <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
                         <input id="form_email" class="form-control" type="email" th:field="${user.email}" placeholder="Please enter your Email"/>
@@ -44,11 +28,31 @@
                         <input id="form_user_name" class="form-control" type="text" th:field="${user.username}" placeholder="Please enter your User Name"/>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form_password">Password *</label>
                         <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
                         <input id="form_password" class="form-control" type="password" th:field="${user.password}" placeholder="Please enter your Password"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_name">First Name</label>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
+                        <input id="form_name" class="form-control" type="text" th:field="${user.firstName}" placeholder="Please enter your fist name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_surname">Surname</label>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"/>
+                        <input id="form_surname" class="form-control" type="text" th:field="${user.surname}" placeholder="Please enter your Surname"/>
                     </div>
                 </div>
             </div>

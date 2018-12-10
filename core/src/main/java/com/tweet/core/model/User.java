@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,14 +25,16 @@ public class User {
     @NaturalId
     private String isbn;
 
+    @NotEmpty(message = "{NotEmpty.User.username}")
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Length(min = 8)
+    @Length(min = 8, max = 31, message = "{Length.User.password}")
     @Column(name = "password", nullable = false)
     private String password;
 
     @Email
+    @NotEmpty(message = "{NotEmpty.User.email}")
     @Column(name = "email", nullable = false)
     private String email;
 
