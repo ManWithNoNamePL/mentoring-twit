@@ -1,5 +1,6 @@
 package com.tweet.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,9 +16,11 @@ public class UserSettings {
     @Column(name = "settings_id", nullable = false)
     private Long id;
 
-    @OneToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_id")
-    private Long userId;
+    @JsonIgnore // FIXME cycling dependency
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "settings_id")
+    private User userId;
 
     @Column(name = "country", nullable = false)
     private String country;
