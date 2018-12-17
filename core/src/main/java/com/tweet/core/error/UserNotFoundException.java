@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 
 import static java.lang.String.format;
 
-public class UserNotFoundException extends TweetCommonException {
+public class UserNotFoundException extends CommonException {
 
-    public UserNotFoundException(String userId) {
+    public UserNotFoundException(Long userId) {
         super(format(ErrorCode.USER_NOT_FOUND.getMsg(), userId));
     }
 
