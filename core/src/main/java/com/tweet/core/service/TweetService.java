@@ -1,7 +1,6 @@
 package com.tweet.core.service;
 
 import com.tweet.core.model.Tweet;
-import com.tweet.core.model.User;
 
 import java.util.List;
 

@@ -23,8 +23,7 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public Tweet getById(Long tweetId) {
-        return tweetRepository.findById(tweetId).orElseThrow(
-                () -> new TweetNotFoundException(tweetId));
+        return tweetRepository.findById(tweetId).orElseThrow(() -> new TweetNotFoundException(tweetId));
     }
 
     @Override
@@ -34,13 +33,12 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public void delete(Long tweetId) {
-
+        tweetRepository.deleteById(tweetId);
     }
 
     @Override
     public Long getUserIdByTweet(Long tweetId) {
-        return tweetRepository.findById(tweetId).orElseThrow(
-                () -> new TweetNotFoundException(tweetId))
+        return tweetRepository.findById(tweetId).orElseThrow(() -> new TweetNotFoundException(tweetId))
                 .getUserId();
     }
 
