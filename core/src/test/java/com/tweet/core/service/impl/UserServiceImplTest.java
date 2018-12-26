@@ -1,5 +1,6 @@
 package com.tweet.core.service.impl;
 
+import com.tweet.core.error.UserNotFoundException;
 import com.tweet.core.model.User;
 import com.tweet.core.model.UserRole;
 import com.tweet.core.service.UserService;
@@ -58,6 +59,30 @@ public class UserServiceImplTest {
     }
 
     @Test
+    void getByUsername_existingUser_returnUser() {
+        createCorrectUser("Test F", "Test S", "test", "test@te.co", Collections.singleton(role), "pass12345");
+        User user = new User();
+        user.setFirstName("Test F");
+        user.setSurname("Test S");
+        user.setUsername("test");
+        user.setEmail("test@te.co");
+        user.setPassword("pass12345");
+
+        UserRole role = new UserRole();
+        role.setName(UserRole.Name.USER);
+        user.setUserRoles(Collections.singleton(role));
+
+        User userFromDb = userService.getByUsername("test");
+        // We want to ignore user roles in this assertion as it will have auto generated id, same with id, better
+        // skip it even taking into consideration that we have it.
+        assertThat(userFromDb)
+                .isEqualToIgnoringGivenFields(user, "id", "userRoles");
+        assertThat(userFromDb.getUserRoles())
+                .usingElementComparatorIgnoringFields("roleId")
+                .containsExactlyInAnyOrder(role);
+    }
+
+    @Test
     void getAll_returnAllUsers() {
         createCorrectUser("Test F", "Test S", "test", "test@te.co", Collections.singleton(role), "pass12345");
         createCorrectUser("Test F", "Test S", "test", "test@te.co", Collections.singleton(role), "pass12345");
@@ -88,7 +113,7 @@ public class UserServiceImplTest {
     void getUserById_notExisting_throwsException() {
         assertThat(catchThrowable(
                 () -> userService.getById(-1L)))
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(UserNotFoundException.class);
     }
 
     private Long createCorrectUser(String firstName, String surname, String username, String email, Set<UserRole> roles, String password) {

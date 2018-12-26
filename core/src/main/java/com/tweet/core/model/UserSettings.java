@@ -11,13 +11,13 @@ import java.util.TimeZone;
 public class UserSettings {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "settings_id", nullable = false)
     private Long id;
 
-    @OneToOne(targetEntity = User.class)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private Long userId;
+    private User user;
 
     @Column(name = "country", nullable = false)
     private String country;

@@ -30,6 +30,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(
+                () -> new UserNotFoundException(username));
+    }
+
+    @Override
     public void update(User update) {
         // validate user
         // update user in db

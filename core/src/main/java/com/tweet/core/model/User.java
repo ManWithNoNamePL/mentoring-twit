@@ -54,7 +54,7 @@ public class User {
     @OneToMany(mappedBy = "userId")
     private Set<Tweet> tweets;
 
-    @OneToOne(mappedBy = "userId")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserSettings userSettings;
 
     @ManyToMany(cascade = CascadeType.ALL)

@@ -10,6 +10,10 @@ public class UserNotFoundException extends CommonException {
         super(format(ErrorCode.USER_NOT_FOUND.getMsg(), userId));
     }
 
+    public UserNotFoundException(String username) {
+        super(format(ErrorCode.USER_NOT_FOUND.getMsg(), username));
+    }
+
     @Override
     public ErrorCode reason() {
         return ErrorCode.USER_NOT_FOUND;
