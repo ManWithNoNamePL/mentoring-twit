@@ -41,7 +41,7 @@ CREATE TABLE USER_SETTINGS (
  settings_id INT unsigned NOT NULL AUTO_INCREMENT,
  user_id INT NOT NULL,
  country VARCHAR2(32) NOT NULL,
- timezone VARCHAR2(12),
+ timezone VARCHAR2(32),
  language VARCHAR2(32),
  PRIMARY KEY (settings_id),
  CONSTRAINT user_fk2 FOREIGN KEY (user_id) REFERENCES USER(user_id)

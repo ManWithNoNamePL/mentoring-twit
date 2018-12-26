@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/ui")
-public class WallController {
+public class WallControllerUI {
 
     @GetMapping("/wall")
     public String displayWall() {
